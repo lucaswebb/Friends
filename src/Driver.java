@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Created by lucaswebb on 1/23/15.  THIS IS SAM HEY LUCAS
+ * Created by lucaswebb on 1/23/15.  THIS IS SAM HEY LUCAS!!
  */
 public class Driver {
     public static void main(String[] args) {
