@@ -20,7 +20,7 @@ public class Driver{
         addFriendToHierarchy(rt, new Friend("John", "Dover"));
         addFriendToHierarchy(rt, new Friend("Idiot", "Dumbville"));
         addFriendToHierarchy(rt, new Friend("Tim", "Timmyland"));
-        System.out.println(FriendToString(rt));
+        System.out.println(FriendTreeToString(rt));
     }
 
     public void createFriends(){
@@ -53,9 +53,9 @@ public class Driver{
         }
         return rt;
     }
-    public String FriendToString(Friend rt) {//Convert subtree to String (In alphabetical order) 
+    public String FriendTreeToString(Friend rt) {//Convert subtree to String (In alphabetical order) 
         if (rt == null) { return ""; }
 
-        return "" + FriendToString(rt.leftFriend()) + rt.name() + " of " + rt.location() + "\n" + FriendToString(rt.rightFriend());
+        return "" + FriendTreeToString(rt.leftFriend()) + rt.name() + " of " + rt.location() + "\n" + FriendTreeToString(rt.rightFriend());
     }
 }
