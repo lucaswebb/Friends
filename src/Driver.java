@@ -49,10 +49,9 @@ public class Driver{
         }
         return rt;
     }
-    public String FriendToString(Friend rt) {//Convert subtree to String (In Order) 
+    public String FriendToString(Friend rt) {//Convert subtree to String (In alphabetical order) 
         if (rt == null) { return ""; }
 
-        return "" + rt.name() + " of " + rt.location() + "\n" + FriendToString(rt.leftFriend()) + FriendToString(rt.rightFriend());
+        return "" + FriendToString(rt.leftFriend()) + rt.name() + " of " + rt.location() + "\n" + FriendToString(rt.rightFriend());
     }
-    //Test
 }
