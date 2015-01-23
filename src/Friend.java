@@ -50,4 +50,8 @@ public class Friend {
     public Friend rightFriend() { return rightFriend; }
 
     public Friend leftFriend() { return leftFriend; }
+
+    public String toString() {
+        return "" + name() + " of " + location();
+    }
 }

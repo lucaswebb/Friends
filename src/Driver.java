@@ -16,6 +16,10 @@ public class Driver{
         Friend rt = new Friend("Frodo", "The Shire");
         addFriendToHierarchy(rt, new Friend("Sam", "The Shire"));
         addFriendToHierarchy(rt, new Friend("Aragorn", "Gondor"));
+        addFriendToHierarchy(rt, new Friend("Sam", "Eliot"));
+        addFriendToHierarchy(rt, new Friend("John", "Dover"));
+        addFriendToHierarchy(rt, new Friend("Idiot", "Dumbville"));
+        addFriendToHierarchy(rt, new Friend("Tim", "Timmyland"));
         System.out.println(FriendToString(rt));
     }
 
@@ -41,7 +45,7 @@ public class Driver{
         if (rt == null) {
             return f;
         }
-        if (rt.name().compareTo(f.name())<=0) {
+        if (rt.toString().compareTo(f.toString())<=0) {
             rt.setRight(addFriendToHierarchy(rt.rightFriend(), f));
         }
         else {
