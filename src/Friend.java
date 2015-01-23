@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 
 /**
- * Created by Samuel Noyes, Lucas Webb, and Michelle Ramiz on 1/23/15.  THIS IS NOT THE ONE YOU WANT!!
+ * Created by Samuel Noyes, Lucas Webb, and Michelle Ramiz on 1/23/15.
  */
 public class Friend {
     private String name;

@@ -11,7 +11,7 @@ public class Driver {
     }
     public static void createFriends(){
         //Convert file to String
-        File friends = new File("/Users/lucaswebb/IdeaProjects/CSC420/Friends/src/friends.txt");
+        File friends = new File("Friends/src/friends.txt");
         try{
             Scanner scan = new Scanner(friends);
             String str = "";
