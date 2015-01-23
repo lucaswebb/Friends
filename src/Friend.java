@@ -50,7 +50,4 @@ public class Friend {
     public Friend rightFriend() { return rightFriend; }
 
     public Friend leftFriend() { return leftFriend; }
-
-
-
 }

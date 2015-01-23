@@ -5,8 +5,7 @@ import java.util.Scanner;
 /**
  * Created by lucaswebb on 1/23/15.
  */
-public class Driver {
-
+public class Driver{
     public static void main(String[] args) {
         Driver m = new Driver();
         //m.createFriends();
@@ -37,6 +36,7 @@ public class Driver {
             e.printStackTrace();
         }
     }
+
     public Friend addFriendToHierarchy(Friend rt, Friend f) {//Add a friend f to the BST rt
         if (rt == null) {
             return f;
@@ -54,4 +54,5 @@ public class Driver {
 
         return "" + rt.name() + " of " + rt.location() + "\n" + FriendToString(rt.leftFriend()) + FriendToString(rt.rightFriend());
     }
+    //Test
 }
