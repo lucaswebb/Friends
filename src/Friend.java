@@ -51,16 +51,6 @@ public class Friend {
 
     public Friend leftFriend() { return leftFriend; }
 
-    public String toString() {//Convert subtree to String (In Order)
-        String rtn = "";
 
-        return rtn;
-    }
-
-    public String toString(String rtn) {//Convert subtree to String (In Order)
-
-
-        return rtn;
-    }
 
 }

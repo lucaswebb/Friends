@@ -6,10 +6,21 @@ import java.util.Scanner;
  * Created by lucaswebb on 1/23/15.
  */
 public class Driver {
+
     public static void main(String[] args) {
-        createFriends();
+        Driver m = new Driver();
+        //m.createFriends();
+        m.test();
     }
-    public static void createFriends(){
+
+    public void test() {
+        Friend rt = new Friend("Frodo", "The Shire");
+        addFriendToHierarchy(rt, new Friend("Sam", "The Shire"));
+        addFriendToHierarchy(rt, new Friend("Aragorn", "Gondor"));
+        System.out.println(FriendToString(rt));
+    }
+
+    public void createFriends(){
         //Convert file to String
         File friends = new File("Friends/src/friends.txt");
         try{
@@ -34,8 +45,13 @@ public class Driver {
             rt.setRight(addFriendToHierarchy(rt.rightFriend(), f));
         }
         else {
-            rt.setRight(addFriendToHierarchy(rt.leftFriend(), f));
+            rt.setLeft(addFriendToHierarchy(rt.leftFriend(), f));
         }
         return rt;
+    }
+    public String FriendToString(Friend rt) {//Convert subtree to String (In Order) 
+        if (rt == null) { return ""; }
+
+        return "" + rt.name() + " of " + rt.location() + "\n" + FriendToString(rt.leftFriend()) + FriendToString(rt.rightFriend());
     }
 }
