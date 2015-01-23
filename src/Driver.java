@@ -26,4 +26,16 @@ public class Driver {
             e.printStackTrace();
         }
     }
+    public Friend addFriendToHierarchy(Friend rt, Friend f) {//Add a friend f to the BST rt
+        if (rt == null) {
+            return f;
+        }
+        if (rt.name().compareTo(f.name())<=0) {
+            rt.setRight(addFriendToHierarchy(rt.rightFriend(), f));
+        }
+        else {
+            rt.setRight(addFriendToHierarchy(rt.leftFriend(), f));
+        }
+        return rt;
+    }
 }
