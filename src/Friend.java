@@ -4,6 +4,7 @@ import java.util.ArrayList;
 /**
  * Created by Samuel Noyes, Lucas Webb, and Michelle Ramiz on 1/23/15.
  */
+
 public class Friend {
     private String name;
     private String location;
@@ -53,5 +54,21 @@ public class Friend {
 
     public String toString() {
         return "" + name() + " of " + location();
+    }
+
+    public int friends() {
+        return friends.size();
+    }
+
+    public int friendsOfFriends() {//Counts amount of friends of friends, not including actual friends or repeats
+        ArrayList<Friend> friendsOfFriendsList = new ArrayList<Friend>();
+        for (Friend f:friends) {
+            for (Friend FoF: f.friends) {
+                if (!friendsOfFriendsList.contains(FoF)) {
+                    friendsOfFriendsList.add(FoF);
+                }
+            }
+        }
+        return friendsOfFriendsList.size();
     }
 }
