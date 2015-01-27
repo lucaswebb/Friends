@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.ArrayList;
 
 /**
  * Created by Samuel Noyes, Lucas Webb, and Michelle Ramiz on 1/23/15.
@@ -33,7 +32,6 @@ public class Friend {
 
     public void addFriend(Friend f) {//Add a friend to the ArrayList
         friends.add(f);
-
     }
 
     public void removeFriend(Friend f) {

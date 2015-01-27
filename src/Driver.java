@@ -27,10 +27,11 @@ public class Driver{
     public static void main(String[] args) {
         Driver m = new Driver();
         m.createFriends();
-        m.test();
-        System.out.println(m.numFriends());
-        System.out.println(m.friendExists("Sam", m.rt));
-        System.out.println(m.friendsOfFriends("Tim").toString());
+        //m.test();
+        //System.out.println(m.numFriends());
+        //System.out.println(m.friendExists("Sam", m.rt));
+        //System.out.println(m.friendsOfFriends("Tim").toString());
+        //m.toString();
     }
 
     public void test() {//Just creates some relationships as a test
@@ -50,9 +51,9 @@ public class Driver{
     public void createFriends(){
         //Convert file to String
         File friends = new File("Friends/src/friends.txt");
+        String str = "";
         try{
             Scanner scan = new Scanner(friends);
-            String str = "";
 
             while(scan.hasNextLine()){
                 String line = scan.nextLine();
@@ -62,6 +63,49 @@ public class Driver{
             System.out.println(str);
         } catch (FileNotFoundException e){
             e.printStackTrace();
+        }
+        //Create friends
+        int num = (int)str.charAt(0);
+        int commas = 0;
+        int i = 2;
+        boolean first = true;
+        while(commas != num){
+            String friend = "";
+            String location = "";
+            String friend2 = "";
+            String location2 = "";
+            while(str.charAt(i) != ','){
+                while(str.charAt(i) != '['){
+                    friend += str.charAt(i);
+                    i++;
+                }
+                while(str.charAt(i) != ']'){
+                    location += str.charAt(i);
+                    i++;
+                }
+                i++;
+                while(str.charAt(i) != '['){
+                    friend2 += str.charAt(i);
+                    i++;
+                }
+                while(str.charAt(i) != ']'){
+                    location2 += str.charAt(i);
+                    i++;
+                }
+                i++;
+            }
+            if(first){
+                rt = new Friend(friend, location);
+                first = false;
+            }
+            if(!(friendExists(friend, rt))){
+                addFriendToHierarchy((new Friend(friend, location)));
+            }
+            if(!(friendExists(friend2, rt))){
+                addFriendToHierarchy((new Friend(friend2, location2)));
+            }
+            makeFriends(getFriendWithName(friend, rt), getFriendWithName(friend2, rt));
+            commas++;
         }
     }
 
