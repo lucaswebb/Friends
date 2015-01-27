@@ -21,7 +21,7 @@ import java.util.Scanner;
  * Also the method that reads from the text file and turns them into a tree is yet to be implemented.
  */
 public class Driver{
-    int cnt = 1;//Because there will always be one root plus the ones added with addFriendsToHierarchy, which increments cnt
+    int cnt = 1;//Set it to one because there will always be one root plus the ones added with addFriendsToHierarchy, which increments cnt
     Friend rt;
 
     public static void main(String[] args) {
@@ -35,11 +35,11 @@ public class Driver{
 
     public void test() {//Just creates some relationships as a test
         rt = new Friend("Frodo", "The Shire");
-        addFriendToHierarchy(rt, new Friend("Sam", "The Shire"));
-        addFriendToHierarchy(rt, new Friend("Aragorn", "Gondor"));
-        addFriendToHierarchy(rt, new Friend("John", "Dover"));
-        addFriendToHierarchy(rt, new Friend("Idiot", "Dumbville"));
-        addFriendToHierarchy(rt, new Friend("Tim", "Timmyland"));
+        addFriendToHierarchy(new Friend("Sam", "The Shire"));
+        addFriendToHierarchy(new Friend("Aragorn", "Gondor"));
+        addFriendToHierarchy(new Friend("John", "Dover"));
+        addFriendToHierarchy(new Friend("Idiot", "Dumbville"));
+        addFriendToHierarchy(new Friend("Tim", "Timmyland"));
         makeFriends(getFriendWithName("Tim", rt), getFriendWithName("John", rt));
         makeFriends(getFriendWithName("Tim", rt), getFriendWithName("Idiot", rt));
         makeFriends(getFriendWithName("John", rt), getFriendWithName("Aragorn", rt));
@@ -65,18 +65,24 @@ public class Driver{
         }
     }
 
-    public Friend addFriendToHierarchy(Friend rt, Friend f) {//Add a friend f to the BST rt - updates count as well
-        if (rt == null) {
-            incrementCount();
-            return f;
+    public Friend addFriendToHierarchy(Friend f) {// serves as a buffer - if the name has already been added, returns null
+        if (!friendExists(f.name(), rt)) {
+            return addFriendToHierarchy(f, rt);
         }
-        if (rt.toString().compareTo(f.toString())<=0) {
-            rt.setRight(addFriendToHierarchy(rt.rightFriend(), f));
-        }
-        else {
-            rt.setLeft(addFriendToHierarchy(rt.leftFriend(), f));
-        }
-        return rt;
+        return null;
+    }
+
+    private Friend addFriendToHierarchy(Friend rt, Friend f) {//Add a friend f to the BST rt - updates count as well - private because should only be called by the method above so that repeating names are never added.
+            if (rt == null) {
+                incrementCount();
+                return f;
+            }
+            if (rt.toString().compareTo(f.toString()) <= 0) {
+                rt.setRight(addFriendToHierarchy(rt.rightFriend(), f));
+            } else {
+                rt.setLeft(addFriendToHierarchy(rt.leftFriend(), f));
+            }
+            return rt;
     }
 
     public String FriendTreeToString(Friend rt) {//Convert subtree to String (In alphabetical order) 
