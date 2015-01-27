@@ -65,11 +65,12 @@ public class Driver{
             e.printStackTrace();
         }
         //Create friends
-        int num = (int)str.charAt(0);
+        int num = Character.getNumericValue(str.charAt(0));
         int commas = 0;
-        int i = 2;
+        int i = 1;
         boolean first = true;
         while(commas != num){
+            i++;
             String friend = "";
             String location = "";
             String friend2 = "";
@@ -79,21 +80,26 @@ public class Driver{
                     friend += str.charAt(i);
                     i++;
                 }
+                i++;
                 while(str.charAt(i) != ']'){
                     location += str.charAt(i);
                     i++;
                 }
                 i++;
+                i++;
                 while(str.charAt(i) != '['){
                     friend2 += str.charAt(i);
                     i++;
                 }
+                i++;
                 while(str.charAt(i) != ']'){
                     location2 += str.charAt(i);
                     i++;
                 }
                 i++;
             }
+            System.out.println(friend + " " + location);
+            System.out.println(friend2 + " " + location2);
             if(first){
                 rt = new Friend(friend, location);
                 first = false;
@@ -104,7 +110,7 @@ public class Driver{
             if(!(friendExists(friend2, rt))){
                 addFriendToHierarchy((new Friend(friend2, location2)));
             }
-            makeFriends(getFriendWithName(friend, rt), getFriendWithName(friend2, rt));
+            //makeFriends(getFriendWithName(friend, rt), getFriendWithName(friend2, rt));
             commas++;
         }
     }
