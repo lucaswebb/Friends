@@ -105,7 +105,7 @@ public class Driver{
                 first = false;
             }
             if(!(friendExists(friend, rt))){
-                addFriendToHierarchy((new Friend(friend, location)));
+                addFriendToHierarchy((new Friend(friend, location)));//
             }
             if(!(friendExists(friend2, rt))){
                 addFriendToHierarchy((new Friend(friend2, location2)));
