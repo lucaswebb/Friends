@@ -110,7 +110,7 @@ public class Driver{
             if(!(friendExists(friend2, rt))){
                 addFriendToHierarchy((new Friend(friend2, location2)));
             }
-            //makeFriends(getFriendWithName(friend, rt), getFriendWithName(friend2, rt));
+            makeFriends(getFriendWithName(friend, rt), getFriendWithName(friend2, rt));
             commas++;
         }
     }
@@ -125,6 +125,7 @@ public class Driver{
     private Friend addFriendToHierarchy(Friend rt, Friend f) {//Add a friend f to the BST rt - updates count as well - private because should only be called by the method above so that repeating names are never added.
             if (rt == null) {
                 incrementCount();
+                System.out.println("Adding " + f.name());
                 return f;
             }
             if (rt.toString().compareTo(f.toString()) <= 0) {
