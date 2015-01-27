@@ -11,6 +11,7 @@ import java.util.Scanner;
  * Friends of Friends list
  * Add Friend
  * Remove Friend
+ * There is already a method to check if a friend with the given name already exists - no need to do that again.
  *
  *
  * TO-DO's:
@@ -28,7 +29,7 @@ public class Driver{
         m.createFriends();
         m.test();
         System.out.println(m.numFriends());
-        System.out.println(m.friendExists("Sam", "The Shire", m.rt));
+        System.out.println(m.friendExists("Sam", m.rt));
         System.out.println(m.friendsOfFriends("Tim").toString());
     }
 
@@ -64,7 +65,7 @@ public class Driver{
         }
     }
 
-    public Friend addFriendToHierarchy(Friend rt, Friend f) {//Add a friend f to the BST rt
+    public Friend addFriendToHierarchy(Friend rt, Friend f) {//Add a friend f to the BST rt - updates count as well
         if (rt == null) {
             incrementCount();
             return f;
@@ -84,10 +85,10 @@ public class Driver{
         return "" + FriendTreeToString(rt.leftFriend()) + rt.name() + " of " + rt.location() + "\n" + FriendTreeToString(rt.rightFriend());
     }
 
-    public boolean friendExists(String name, String location, Friend rt) { //Given a subtree rt, check to see if there is already a Friend with the given name and location
+    public boolean friendExists(String name, Friend rt) { //Given a subtree rt, check to see if there is already a Friend with the given name and location
         if (rt == null) return false;
-        if (rt.name().equals(name) && rt.location().equals(location)) return true;
-        return friendExists(name, location, rt.leftFriend()) || friendExists(name, location, rt.rightFriend());
+        if (rt.name().equals(name)) return true;
+        return friendExists(name, rt.leftFriend()) || friendExists(name, rt.rightFriend());
     }
 
     public void incrementCount() {//Add one to the friend count
@@ -102,7 +103,7 @@ public class Driver{
         return getFriendWithName(name, rt).friendsOfFriends();
     }
 
-    public Friend getFriendWithName(String name, Friend rt) {//Returns a Friend or null if not found
+    public Friend getFriendWithName(String name, Friend rt) {//Returns a Friend object with the given name or null if not found
         if (rt == null) return null;
         if (rt.name() == name) {
             return rt;
@@ -118,12 +119,12 @@ public class Driver{
         return null;
     }
 
-    public void makeFriends(Friend f, Friend f2) {
+    public void makeFriends(Friend f, Friend f2) {//Make a pair of friends - add each to each other's lists
         f.addFriend(f2);
         f2.addFriend(f);
     }
 
-    public void unfriend(Friend f, Friend f2) {
+    public void unfriend(Friend f, Friend f2) {//unfriend two people - remove each from each other's lists
         f.removeFriend(f2);
         f2.removeFriend(f);
     }
