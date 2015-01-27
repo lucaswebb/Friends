@@ -5,6 +5,19 @@ import java.util.Scanner;
 
 /**
  * Created by lucaswebb on 1/23/15.
+ *
+ *
+ * Already done:
+ * Friends of Friends list
+ * Add Friend
+ * Remove Friend
+ *
+ *
+ * TO-DO's:
+ * From assignment doc: "Display all relationships as shown initially in the first assignment.  That is, one line per name with the associated friends of that person following."
+ *     - This is a little unclear but it doesn't mean Aragorn[Gondor], it means like this:
+ *          -  Frodo of the Shire is friends with Sam, Aragorn, and Gandalf
+ * Also the method that reads from the text file and turns them into a tree is yet to be implemented.
  */
 public class Driver{
     int cnt = 1;//Because there will always be one root plus the ones added with addFriendsToHierarchy, which increments cnt
@@ -16,16 +29,20 @@ public class Driver{
         m.test();
         System.out.println(m.numFriends());
         System.out.println(m.friendExists("Sam", "The Shire", m.rt));
+        System.out.println(m.friendsOfFriends("Tim").toString());
     }
 
-    public void test() {
+    public void test() {//Just creates some relationships as a test
         rt = new Friend("Frodo", "The Shire");
         addFriendToHierarchy(rt, new Friend("Sam", "The Shire"));
         addFriendToHierarchy(rt, new Friend("Aragorn", "Gondor"));
-        addFriendToHierarchy(rt, new Friend("Sam", "Eliot"));
         addFriendToHierarchy(rt, new Friend("John", "Dover"));
         addFriendToHierarchy(rt, new Friend("Idiot", "Dumbville"));
         addFriendToHierarchy(rt, new Friend("Tim", "Timmyland"));
+        makeFriends(getFriendWithName("Tim", rt), getFriendWithName("John", rt));
+        makeFriends(getFriendWithName("Tim", rt), getFriendWithName("Idiot", rt));
+        makeFriends(getFriendWithName("John", rt), getFriendWithName("Aragorn", rt));
+        makeFriends(getFriendWithName("Idiot", rt), getFriendWithName("Aragorn", rt));
         System.out.println(FriendTreeToString(rt));
     }
 
@@ -79,5 +96,35 @@ public class Driver{
 
     public int numFriends() {//return the number of Friends in the BST
         return cnt;
+    }
+
+    public ArrayList<String> friendsOfFriends(String name){// There is a friends of friends method in the class Friend, but we are supposed to take a name and return the list of friends, so this is somewhat of an extension for that method.
+        return getFriendWithName(name, rt).friendsOfFriends();
+    }
+
+    public Friend getFriendWithName(String name, Friend rt) {//Returns a Friend or null if not found
+        if (rt == null) return null;
+        if (rt.name() == name) {
+            return rt;
+        }
+        Friend fr = getFriendWithName(name, rt.rightFriend());
+        Friend fl = getFriendWithName(name, rt.leftFriend());
+        if (fr != null) {
+            return fr;
+        }
+        if (fl != null) {
+            return fl;
+        }
+        return null;
+    }
+
+    public void makeFriends(Friend f, Friend f2) {
+        f.addFriend(f2);
+        f2.addFriend(f);
+    }
+
+    public void unfriend(Friend f, Friend f2) {
+        f.removeFriend(f2);
+        f2.removeFriend(f);
     }
 }

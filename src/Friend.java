@@ -31,15 +31,13 @@ public class Friend {
         return friends.contains(f) && f.friends.contains(this);
     }
 
-    public void addFriend(Friend f) {//Add a friend to the ArrayList.  Should only be called on one Friend, as it
-        friends.add(f);              //updates both
-        f.addFriend(this);
+    public void addFriend(Friend f) {//Add a friend to the ArrayList
+        friends.add(f);
 
     }
 
     public void removeFriend(Friend f) {
         friends.remove(f);
-        f.friends.remove(this);
     }
 
     public String name() { return name; }
@@ -60,15 +58,15 @@ public class Friend {
         return friends.size();
     }
 
-    public int friendsOfFriends() {//Counts amount of friends of friends, not including actual friends or repeats
-        ArrayList<Friend> friendsOfFriendsList = new ArrayList<Friend>();
+    public ArrayList<String> friendsOfFriends() {//returns ArrayList of names
+        ArrayList<String> friendsOfFriendsList = new ArrayList<String>();
         for (Friend f:friends) {
             for (Friend FoF: f.friends) {
-                if (!friendsOfFriendsList.contains(FoF)) {
-                    friendsOfFriendsList.add(FoF);
+                if (!friendsOfFriendsList.contains(FoF.name()) && FoF != this) {
+                    friendsOfFriendsList.add(FoF.name());
                 }
             }
         }
-        return friendsOfFriendsList.size();
+        return friendsOfFriendsList;
     }
 }
