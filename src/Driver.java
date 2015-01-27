@@ -98,8 +98,8 @@ public class Driver{
                 }
                 i++;
             }
-            System.out.println(friend + " " + location);
-            System.out.println(friend2 + " " + location2);
+            //System.out.println(friend + " " + location);
+            //System.out.println(friend2 + " " + location2);
             if(first){
                 rt = new Friend(friend, location);
                 first = false;
@@ -109,6 +109,7 @@ public class Driver{
             }
             if(!(friendExists(friend2, rt))){
                 addFriendToHierarchy((new Friend(friend2, location2)));
+                System.out.println(friend2);
             }
             makeFriends(getFriendWithName(friend, rt), getFriendWithName(friend2, rt));
             commas++;
