@@ -12,12 +12,12 @@ import java.util.Scanner;
  * Add Friend
  * Remove Friend
  * There is already a method to check if a friend with the given name already exists - no need to do that again.
- * DONE: From assignment doc: "Display all relationships as shown initially in the first assignment.  That is, one line per name with the associated friends of that person following."
- *     - This is a little unclear but it doesn't mean Aragorn[Gondor], it means like this:
- *          -  Frodo of the Shire is friends with Sam, Aragorn, and Gandalf
+ * Display all relationships as shown initially in the first assignment.
+ * The method that reads from the text file and turns them into a tree.
  *
  * TO-DO's:
- *  The method that reads from the text file and turns them into a tree is yet to be implemented.
+ * TEST THE PROGRAM
+ * COMMENT CODE MORE
  */
 public class Driver{
     int cnt = 1;//Set it to one because there will always be one root plus the ones added with addFriendsToHierarchy, which increments cnt
@@ -26,25 +26,6 @@ public class Driver{
     public static void main(String[] args) {
         Driver m = new Driver();
         m.createFriends();
-        //m.test();
-        //System.out.println(m.numFriends());
-        //System.out.println(m.friendExists("Sam", m.rt));
-        //System.out.println(m.friendsOfFriends("Tim").toString());
-        //m.toString();
-    }
-
-    public void test() {//Just creates some relationships as a test
-        rt = new Friend("Frodo", "The Shire");
-        addFriendToHierarchy(new Friend("Sam", "The Shire"));
-        addFriendToHierarchy(new Friend("Aragorn", "Gondor"));
-        addFriendToHierarchy(new Friend("John", "Dover"));
-        addFriendToHierarchy(new Friend("Idiot", "Dumbville"));
-        addFriendToHierarchy(new Friend("Tim", "Timmyland"));
-        makeFriends(getFriendWithName("Tim", rt), getFriendWithName("John", rt));
-        makeFriends(getFriendWithName("Tim", rt), getFriendWithName("Idiot", rt));
-        makeFriends(getFriendWithName("John", rt), getFriendWithName("Aragorn", rt));
-        makeFriends(getFriendWithName("Idiot", rt), getFriendWithName("Aragorn", rt));
-        System.out.println(FriendTreeToString(rt));
     }
 
     public void createFriends(){
@@ -109,11 +90,8 @@ public class Driver{
             if(!(friendExists(friend2, rt))){
                 addFriendToHierarchy((new Friend(friend2, location2)));
             }
-            System.out.println("Making friends between " + friend + " and " + friend2 + ".");
-            System.out.println(FriendTreeToString(rt));
-            System.out.println("rt = " + rt.name());
-            System.out.println(getFriendWithName(friend, rt).name());
             makeFriends(getFriendWithName(friend, rt), getFriendWithName(friend2, rt));
+            System.out.println(FriendTreeToString(rt));
             commas++;
         }
     }
@@ -163,16 +141,18 @@ public class Driver{
 
     public Friend getFriendWithName(String name, Friend rt) {//Returns a Friend object with the given name or null if not found
         if (rt == null) return null;
-        if (rt.name() == name) {
+        if (rt.name().equals(name)) {
             return rt;
         }
-        Friend fr = getFriendWithName(name, rt.rightFriend());
-        Friend fl = getFriendWithName(name, rt.leftFriend());
+        Friend fr;
+        if (rt.name().compareTo(name)<=0) {
+            fr = getFriendWithName(name, rt.rightFriend());
+        }
+        else {
+            fr = getFriendWithName(name, rt.leftFriend());
+        }
         if (fr != null) {
             return fr;
-        }
-        if (fl != null) {
-            return fl;
         }
         return null;
     }

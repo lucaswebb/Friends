@@ -61,7 +61,7 @@ public class Friend {
             else friendsString += fr.name() + " of " + fr.location() + ".";
         }
         if (friendsString == "") {
-            return "" + name() + " of " + location() + " has no friends";
+            return "" + name() + " of " + location() + " has no friends.";
         }
         return "" + name() + " of " + location() + " is friends with " + friendsString;
     }
