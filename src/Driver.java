@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Created by lucaswebb on 1/23/15.
- *
+ * Created by Samuel Noyes, Lucas Webb, and Michelle Ramiz on 1/23/15.
  *
  * Already done:
  * Friends of Friends list
@@ -18,7 +17,9 @@ import java.util.Scanner;
  * TO-DO's:
  * TEST THE PROGRAM
  * COMMENT CODE MORE
+ *
  */
+
 public class Driver{
     int cnt = 1;//Set it to one because there will always be one root plus the ones added with addFriendsToHierarchy, which increments cnt
     Friend rt;
@@ -40,7 +41,6 @@ public class Driver{
                 str = str + line + ",";
             }
             scan.close();
-            System.out.println(str);
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }
@@ -78,26 +78,23 @@ public class Driver{
                 }
                 i++;
             }
-            //System.out.println(friend + " " + location);
-            //System.out.println(friend2 + " " + location2);
             if(first){
                 rt = new Friend(friend, location);
                 first = false;
             }
-            if(!(friendExists(friend, rt))){
+            if(!(friendExists(friend))){
                 addFriendToHierarchy((new Friend(friend, location)));//
             }
-            if(!(friendExists(friend2, rt))){
+            if(!(friendExists(friend2))){
                 addFriendToHierarchy((new Friend(friend2, location2)));
             }
-            makeFriends(getFriendWithName(friend, rt), getFriendWithName(friend2, rt));
-            System.out.println(FriendTreeToString(rt));
+            makeFriends(getFriendWithName(friend), getFriendWithName(friend2));
             commas++;
         }
     }
 
-    public Friend addFriendToHierarchy(Friend f) {// serves as a buffer - if the name has already been added, returns null
-        if (!friendExists(f.name(), rt)) {
+    public Friend addFriendToHierarchy(Friend f) {// serves as a buffer - if the name has already been added, returns null - also so we don't have to specify the rt, automatically uses the already-created rt
+        if (!friendExists(f.name())) {
             return addFriendToHierarchy(rt, f);
         }
         return null;
@@ -121,7 +118,11 @@ public class Driver{
         return "" + FriendTreeToString(rt.leftFriend()) + rt.toString() + "\n" + FriendTreeToString(rt.rightFriend());
     }
 
-    public boolean friendExists(String name, Friend rt) { //Given a subtree rt, check to see if there is already a Friend with the given name and location
+    public boolean friendExists(String name) {//So that we don't have to pass in the rt pointer - automatically checks under rt.
+        return friendExists(name, rt);
+    }
+
+    private boolean friendExists(String name, Friend rt) { //Given a subtree rt, check to see if there is already a Friend with the given name and location
         if (rt == null) return false;
         if (rt.name().equals(name)) return true;
         return friendExists(name, rt.leftFriend()) || friendExists(name, rt.rightFriend());
@@ -136,10 +137,14 @@ public class Driver{
     }
 
     public ArrayList<String> friendsOfFriends(String name){// There is a friends of friends method in the class Friend, but we are supposed to take a name and return the list of friends, so this is somewhat of an extension for that method.
-        return getFriendWithName(name, rt).friendsOfFriends();
+        return getFriendWithName(name).friendsOfFriends();
     }
 
-    public Friend getFriendWithName(String name, Friend rt) {//Returns a Friend object with the given name or null if not found
+    public Friend getFriendWithName(String name) {//So that we don't have to pass in rt, automatically searches under already-created rt.
+        return getFriendWithName(name, rt);
+    }
+
+    private Friend getFriendWithName(String name, Friend rt) {//Returns a Friend object with the given name or null if not found
         if (rt == null) return null;
         if (rt.name().equals(name)) {
             return rt;
@@ -158,10 +163,10 @@ public class Driver{
     }
 
     public void makeFriends(Friend f, Friend f2) {//Make a pair of friends - add each to each other's lists
-        if (f == null) System.out.println("f is null. Program will crash");
-        if (f2 == null) System.out.println("f2 is null. Program will crash");
-        f.addFriend(f2);
-        f2.addFriend(f);
+        if (f != null && f2 != null) {
+            f.addFriend(f2);
+            f2.addFriend(f);
+        }
     }
 
     public void unfriend(Friend f, Friend f2) {//unfriend two people - remove each from each other's lists
