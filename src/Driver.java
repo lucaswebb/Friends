@@ -106,7 +106,7 @@ public class Driver{
                 incrementCount();
                 return f;
             }
-            if (rt.toString().compareTo(f.toString()) <= 0) {
+            if (rt.toString().compareToIgnoreCase(f.toString()) <= 0) {
                 rt.setRight(addFriendToHierarchy(rt.rightFriend(), f));
             } else {
                 rt.setLeft(addFriendToHierarchy(rt.leftFriend(), f));
@@ -124,7 +124,10 @@ public class Driver{
     }
 
     private boolean friendExists(String name, Friend rt) { //Given a subtree rt, check to see if there is already a Friend with the given name and location
-        return rt!=null && (rt.name().equals(name) || friendExists(name, rt.leftFriend()) || friendExists(name, rt.rightFriend()));
+        if (rt == null) return false;
+        if (rt.name().equals(name)) return true;
+        if (rt.name().compareToIgnoreCase(name)<=0) return friendExists(name, rt.rightFriend());
+        return friendExists(name, rt.leftFriend());
     }
 
     public void incrementCount() {//Add one to the friend count
@@ -149,7 +152,7 @@ public class Driver{
             return rt;
         }
         Friend fr;
-        if (rt.name().compareTo(name)<=0) {
+        if (rt.name().compareToIgnoreCase(name)<=0) {
             fr = getFriendWithName(name, rt.rightFriend());
         }
         else {
