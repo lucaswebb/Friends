@@ -49,7 +49,21 @@ public class Friend {
     public Friend leftFriend() { return leftFriend; }
 
     public String toString() {
-        return "" + name() + " of " + location();
+        String friendsString = "";
+        for (int i = 0; i<friends.size(); i++) {
+            Friend fr = friends.get(i);
+            if (i == friends.size()-2) {
+                friendsString += fr.name() + " of " + fr.location() + ", and ";
+            }
+            else if (i<friends.size() -2) {
+                friendsString += fr.name() + " of " + fr.location() + ", ";
+            }
+            else friendsString += fr.name() + " of " + fr.location() + ".";
+        }
+        if (friendsString == "") {
+            return "" + name() + " of " + location() + " has no friends";
+        }
+        return "" + name() + " of " + location() + " is friends with " + friendsString;
     }
 
     public int friends() {

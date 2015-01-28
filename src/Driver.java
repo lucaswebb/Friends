@@ -12,13 +12,12 @@ import java.util.Scanner;
  * Add Friend
  * Remove Friend
  * There is already a method to check if a friend with the given name already exists - no need to do that again.
- *
- *
- * TO-DO's:
- * From assignment doc: "Display all relationships as shown initially in the first assignment.  That is, one line per name with the associated friends of that person following."
+ * DONE: From assignment doc: "Display all relationships as shown initially in the first assignment.  That is, one line per name with the associated friends of that person following."
  *     - This is a little unclear but it doesn't mean Aragorn[Gondor], it means like this:
  *          -  Frodo of the Shire is friends with Sam, Aragorn, and Gandalf
- * Also the method that reads from the text file and turns them into a tree is yet to be implemented.
+ *
+ * TO-DO's:
+ *  The method that reads from the text file and turns them into a tree is yet to be implemented.
  */
 public class Driver{
     int cnt = 1;//Set it to one because there will always be one root plus the ones added with addFriendsToHierarchy, which increments cnt
@@ -110,6 +109,10 @@ public class Driver{
             if(!(friendExists(friend2, rt))){
                 addFriendToHierarchy((new Friend(friend2, location2)));
             }
+            System.out.println("Making friends between " + friend + " and " + friend2 + ".");
+            System.out.println(FriendTreeToString(rt));
+            System.out.println("rt = " + rt.name());
+            System.out.println(getFriendWithName(friend, rt).name());
             makeFriends(getFriendWithName(friend, rt), getFriendWithName(friend2, rt));
             commas++;
         }
@@ -137,8 +140,7 @@ public class Driver{
 
     public String FriendTreeToString(Friend rt) {//Convert subtree to String (In alphabetical order) 
         if (rt == null) { return ""; }
-
-        return "" + FriendTreeToString(rt.leftFriend()) + rt.name() + " of " + rt.location() + "\n" + FriendTreeToString(rt.rightFriend());
+        return "" + FriendTreeToString(rt.leftFriend()) + rt.toString() + "\n" + FriendTreeToString(rt.rightFriend());
     }
 
     public boolean friendExists(String name, Friend rt) { //Given a subtree rt, check to see if there is already a Friend with the given name and location
@@ -176,6 +178,8 @@ public class Driver{
     }
 
     public void makeFriends(Friend f, Friend f2) {//Make a pair of friends - add each to each other's lists
+        if (f == null) System.out.println("f is null. Program will crash");
+        if (f2 == null) System.out.println("f2 is null. Program will crash");
         f.addFriend(f2);
         f2.addFriend(f);
     }
