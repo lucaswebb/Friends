@@ -60,7 +60,7 @@ public class Friend {
             }
             else friendsString += fr.name() + " of " + fr.location() + ".";
         }
-        if (friendsString == "") {
+        if (friendsString.equals("")) {
             return "" + name() + " of " + location() + " has no friends.";
         }
         return "" + name() + " of " + location() + " is friends with " + friendsString;

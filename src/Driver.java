@@ -27,6 +27,7 @@ public class Driver{
     public static void main(String[] args) {
         Driver m = new Driver();
         m.createFriends();
+        System.out.println(m.FriendTreeToString(m.rt));
     }
 
     public void createFriends(){
@@ -123,9 +124,7 @@ public class Driver{
     }
 
     private boolean friendExists(String name, Friend rt) { //Given a subtree rt, check to see if there is already a Friend with the given name and location
-        if (rt == null) return false;
-        if (rt.name().equals(name)) return true;
-        return friendExists(name, rt.leftFriend()) || friendExists(name, rt.rightFriend());
+        return rt!=null && (rt.name().equals(name) || friendExists(name, rt.leftFriend()) || friendExists(name, rt.rightFriend()));
     }
 
     public void incrementCount() {//Add one to the friend count
