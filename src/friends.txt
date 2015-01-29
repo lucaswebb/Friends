@@ -1,6 +1,4 @@
-5
-Frodo[the Shire] Sam[the Shire]
-Boromir[Gondor] Aragorn[Gondor]
-Aragorn[Gondor] Frodo[the Shire]
-Frodo[the Shire] Gandalf[Middle Earth]
-Gandalf[Middle Earth] Aragorn[Gondor]
+3
+Tom[Philadelphia] Jane[Houston]
+Jane[Houston] Catherine[Dallas]
+Manny[San Antonio] Andrea[Exeter]

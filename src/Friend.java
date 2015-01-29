@@ -52,7 +52,10 @@ public class Friend {
         String friendsString = "";
         for (int i = 0; i<friends.size(); i++) {
             Friend fr = friends.get(i);
-            if (i == friends.size()-2) {
+            if (i == friends.size()-2 && friends.size() ==2) {
+                friendsString += fr.name() + " of " + fr.location() + " and ";
+            }
+            else if (i == friends.size()-2) {
                 friendsString += fr.name() + " of " + fr.location() + ", and ";
             }
             else if (i<friends.size() -2) {
