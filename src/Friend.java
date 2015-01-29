@@ -17,7 +17,7 @@ public class Friend {
         rightFriend = null;
         friends= new ArrayList<Friend>();
     }
-
+    //Setters for right and left nodes of BST
     public void setRight(Friend f) {
         rightFriend = f;
     }
@@ -25,7 +25,7 @@ public class Friend {
     public void setLeft(Friend f) {
         leftFriend = f;
     }
-
+    //Returns true if they are friends
     public boolean isFriendsWith(Friend f) {
         return friends.contains(f) && f.friends.contains(this);
     }
@@ -47,7 +47,7 @@ public class Friend {
     public Friend rightFriend() { return rightFriend; }
 
     public Friend leftFriend() { return leftFriend; }
-
+    //ToString method summarizes all friends of one person
     public String toString() {
         String friendsString = "";
         for (int i = 0; i<friends.size(); i++) {
@@ -69,7 +69,7 @@ public class Friend {
     public int friends() {
         return friends.size();
     }
-
+    //Returns an AList of friends of friends
     public ArrayList<String> friendsOfFriends() {//returns ArrayList of names
         ArrayList<String> friendsOfFriendsList = new ArrayList<String>();
         for (Friend f:friends) {

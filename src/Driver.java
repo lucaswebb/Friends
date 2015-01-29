@@ -50,6 +50,7 @@ public class Driver{
         int commas = 0;
         int i = 1;
         boolean first = true;
+        //Parsing of string begins here
         while(commas != num){
             i++;
             String friend = "";
@@ -79,11 +80,11 @@ public class Driver{
                 }
                 i++;
             }
-            if(first){
+            if(first){//Sets the initial node, rt, to the first friend object created
                 rt = new Friend(friend, location);
                 first = false;
             }
-            if(!(friendExists(friend))){
+            if(!(friendExists(friend))){//Checks to make sure friend object hasn't already been created
                 addFriendToHierarchy((new Friend(friend, location)));//
             }
             if(!(friendExists(friend2))){
