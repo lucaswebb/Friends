@@ -22,7 +22,7 @@ import java.util.Scanner;
 
 public class Driver{
     int cnt = 1;//Set it to one because there will always be one root plus the ones added with addFriendsToHierarchy, which increments cnt
-    Friend rt;
+    Friend rt;//Will be set later on
 
     public static void main(String[] args) {
         Driver m = new Driver();
@@ -30,7 +30,7 @@ public class Driver{
         System.out.println(m.FriendTreeToString(m.rt));
     }
 
-    public void createFriends(){
+    public void createFriends(){//Reads file friends.txt and creates friend object if they don't already exist.  Then makes the friendship
         //Convert file to String
         File friends = new File("Friends/src/friends.txt");
         String str = "";
@@ -42,7 +42,7 @@ public class Driver{
                 str = str + line + ",";
             }
             scan.close();
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e){//Catches FileNotFoundException
             e.printStackTrace();
         }
         //Create friends
@@ -51,7 +51,7 @@ public class Driver{
         int i = 1;
         boolean first = true;
         //Parsing of string begins here
-        while(commas != num){
+        while(commas != num){//Commas work to keep track of new lines
             i++;
             String friend = "";
             String location = "";
@@ -90,8 +90,8 @@ public class Driver{
             if(!(friendExists(friend2))){
                 addFriendToHierarchy((new Friend(friend2, location2)));
             }
-            makeFriends(getFriendWithName(friend), getFriendWithName(friend2));
-            commas++;
+            makeFriends(getFriendWithName(friend), getFriendWithName(friend2));//Sets friendship
+            commas++;//Moves on to next pair
         }
     }
 
