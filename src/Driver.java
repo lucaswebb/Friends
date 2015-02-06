@@ -6,29 +6,16 @@ import java.util.Scanner;
 /**
  * Created by Samuel Noyes, Lucas Webb, and Michelle Ramiz on 1/23/15.
  *
- * Already done:
- * Friends of Friends list
- * Add Friend
- * Remove Friend
- * There is already a method to check if a friend with the given name already exists - no need to do that again.
- * Display all relationships as shown initially in the first assignment.
- * The method that reads from the text file and turns them into a tree.
- *
- * TO-DO's:
- * TEST THE PROGRAM
- * COMMENT CODE MORE
  *
  */
 
 public class Driver{
     int cnt = 1;//Set it to one because there will always be one root plus the ones added with addFriendsToHierarchy, which increments cnt
-    Friend rt;//Will be set later on
+    Friend rt = null;//Will be set later on
 
     public static void main(String[] args) {
         Driver m = new Driver();
         m.createFriends();
-        System.out.println(m.FriendTreeToString(m.rt));
-        System.out.println(m.friendsOfFriends("Tom"));
     }
 
     public void createFriends(){//Reads file friends.txt and creates friend object if they don't already exist.  Then makes the friendship
@@ -50,7 +37,6 @@ public class Driver{
         int num = Character.getNumericValue(str.charAt(0));
         int commas = 0;
         int i = 1;
-        boolean first = true;
         //Parsing of string begins here
         while(commas != num){//Commas work to keep track of new lines
             i++;
@@ -81,10 +67,6 @@ public class Driver{
                 }
                 i++;
             }
-            if(first){//Sets the initial node, rt, to the first friend object created
-                rt = new Friend(friend, location);
-                first = false;
-            }
             if(!(friendExists(friend))){//Checks to make sure friend object hasn't already been created
                 addFriendToHierarchy((new Friend(friend, location)));//
             }
@@ -97,7 +79,11 @@ public class Driver{
     }
 
     public Friend addFriendToHierarchy(Friend f) {// serves as a buffer - if the name has already been added, returns null - also so we don't have to specify the rt, automatically uses the already-created rt
-        if (!friendExists(f.name())) {
+        if (rt == null) {
+            rt = f;
+            return f;
+        }
+        else if (!friendExists(f.name())) {
             return addFriendToHierarchy(rt, f);
         }
         return null;

@@ -73,6 +73,7 @@ public class Friend {
         return friends.size();
     }
     //Returns an AList of friends of friends
+
     public ArrayList<String> friendsOfFriends() {//returns ArrayList of names
         ArrayList<String> friendsOfFriendsList = new ArrayList<String>();
         for (Friend f:friends) {
