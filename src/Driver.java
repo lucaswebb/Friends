@@ -16,6 +16,7 @@ public class Driver{
     public static void main(String[] args) {
         Driver m = new Driver();
         m.createFriends();
+        System.out.println(m.FriendTreeToString(m.rt));
     }
 
     public void createFriends(){//Reads file friends.txt and creates friend object if they don't already exist.  Then makes the friendship
